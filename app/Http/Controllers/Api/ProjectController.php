@@ -8,10 +8,10 @@ use App\Models\Project;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::with('type', 'technologies')->get();
-        // dd($projects);
+        $projects = Project::with('type', 'technologies')->paginate(10);
+        //  dd($projects);
         return response()->json([
             'success' => true,
             'message' => 'Ok',
