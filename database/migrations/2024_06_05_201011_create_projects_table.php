@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->text('description')->nullable();
             $table->date('created');
-            $table->string('categories')->nullable()->change();
+            $table->string('categories')->nullable();
             $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
             $table->string('image_url', 255)->nullable();

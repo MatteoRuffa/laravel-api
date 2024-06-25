@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\Models\Project;
+use App\Models\Type;
 
 class ProjectSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class ProjectSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        $typeIds = Type::pluck('id')->toArray();
         for ($i = 0; $i < 100; $i++) {
             $project = new Project();
             $project->title = $faker->words(rand(2, 7), true);
@@ -22,6 +24,7 @@ class ProjectSeeder extends Seeder
             $project->created = $faker->dateTime();
             $project->categories = $faker->words(rand(2, 5), true);
             $project->image_url = $faker->sentence();
+            $project->type_id = $faker->randomElement($typeIds);
             $project->save();
         }
     }
